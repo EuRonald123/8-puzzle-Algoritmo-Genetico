@@ -3,9 +3,9 @@ from algoritmos.alg_genetico import AlgoritmoGenetico
 
 
 TABULEIRO_INICIAL = [
-    [8, 2, 4],
-    [0, 1, 6],
-    [7, 5, 3]
+    [1, 2, 3],
+    [4, 6, 0],
+    [7, 5, 8]
 ]
 
 def main():
