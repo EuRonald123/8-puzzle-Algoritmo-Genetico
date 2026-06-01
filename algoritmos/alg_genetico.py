@@ -28,25 +28,32 @@ class AlgoritmoGenetico:
 
     def avaliar_fitness(self, cromossomo):
         """
-        O fitness baseia-se em quão próximo o tabuleiro fica do objetivo
-        Aplica a sequência no tabuleiro e tira a melhor (menor) distância de Manhattan encontrada no caminho.
-        Quanto mais perto de 0 o fitness, MELHOR.
+        O fitness baseia-se em quão próximo o tabuleiro fica do objetivo.
+        Retorna uma tupla: (Melhor Distancia, Quantidade de Passos até ela).
+        Dessa forma, o python deve priorizar a menor distância e, em caso de empate,
+        o cromossomo que resolveu com menos passos! 
+        Isso força caminhos limpos e sem "vai-e-volta".
         """
         estado_atual = self.inicial
         melhor_distancia = tabuleiro.calcular_manhattan(estado_atual)
+        passos_para_melhor = 0
         
-        for mov in cromossomo:
+        for idx, mov in enumerate(cromossomo):
             estado_atual = tabuleiro.aplicar_movimento(estado_atual, mov)
             dist_atual = tabuleiro.calcular_manhattan(estado_atual)
             
+            # Atualiza se a distância cair (se for melhor)
             if dist_atual < melhor_distancia:
                 melhor_distancia = dist_atual
+                passos_para_melhor = idx + 1
 
-            # Se achar a solução no meio do caminho, já pode parar
             if melhor_distancia == 0:
+                # Se achou 0, já achamos e não gastamos mais passos à toa
+                if passos_para_melhor == 0:  
+                    passos_para_melhor = idx + 1
                 break
                 
-        return melhor_distancia
+        return (melhor_distancia, passos_para_melhor)
 
     def selecao_por_torneio(self, populacao, fitness_populacao, k=3):
         """
@@ -95,18 +102,19 @@ class AlgoritmoGenetico:
             melhor_fit = fitness_pop[melhor_idx]
             
             #CONTROLE DE ESTAGNAÇÃO -> (Evitar Mínimo Local)
-            if melhor_fit < melhor_fit_global:
-                melhor_fit_global = melhor_fit
+            if melhor_fit[0] < melhor_fit_global:
+                melhor_fit_global = melhor_fit[0]
                 estagnacao = 0  # Zerou a estagnação
             else:
                 estagnacao += 1 # Não melhorou
                 
-            print(f"Geração {gen} | Melhor Distância: {melhor_fit} | Estagnação: {estagnacao}/50")
+            print(f"Geração {gen} | Melhor Distância: {melhor_fit[0]} (em {melhor_fit[1]} passos) | Estagnação: {estagnacao}/50")
             
             # 2. Critério de Parada
-            if melhor_fit == 0:
+            if melhor_fit[0] == 0:
                 print(f"\n[!] SOLUÇÃO ENCONTRADA na Geração {gen}!")
-                return melhor_ind
+                # O cromossomo retornou uma tupla então a gnt devolve só a parte dele até a solução
+                return melhor_ind[:melhor_fit[1]]
                 
             # a partir daqui já é brisa minha, tentei adicionar formas para sair dos mínimos locais mas nao funfou
             #TÉCNICA 1: CATACLISMO -> Diversidade extrema
