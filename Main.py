@@ -4,40 +4,50 @@ from algoritmos.alg_AEstrela import AEstrela
 
 
 #Alguns tabuleiros para testes
+tabuleiros = {
+    #facil
+    "facil" : [
+        [1, 3, 5],
+        [4, 2, 0],
+        [7, 8, 6]
+    ],
 
-#facil
-TABULEIRO_INICIAL_0 = [
-    [1, 3, 5],
-    [4, 2, 0],
-    [7, 8, 6]
-]
+    #medio
+    "medio" : [
+        [8, 2, 3],
+        [1, 6, 4],
+        [7, 0, 5]
+    ],
 
-#medio
-TABULEIRO_INICIAL_1 = [
-    [8, 2, 3],
-    [1, 6, 4],
-    [7, 0, 5]
-]
+    #dificil
+    "dificil" : [
+        [8, 6, 7],
+        [2, 5, 4],
+        [3, 0, 1]
+    ],
+    
+    "impossivel": [ # sem solucao
+        [8, 3, 6],
+        [5, 4, 7],
+        [2, 0, 1]
+    ],
+    
+}
 
-#dificil
-TABULEIRO_INICIAL_2 = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 0]
-]
-
+#so alterar aqui que muda o tabuleiro usando para teste
+tabuleiro_teste = tabuleiros["dificil"]
 
 def main():
     print("--- INICIANDO ALGORITMO GENÉTICO PARA 8-PUZZLE ---")
     print("Tabuleiro Inicial:")
-    tabuleiro.imprimir_tabuleiro(TABULEIRO_INICIAL_1)
+    tabuleiro.imprimir_tabuleiro(tabuleiro_teste)
     
-    dist_inicial = tabuleiro.calcular_manhattan(TABULEIRO_INICIAL_1)
+    dist_inicial = tabuleiro.calcular_manhattan(tabuleiro_teste)
     print(f"Distancia Manhattan do inicio: {dist_inicial}\n")
     
     # Executa o AG
     ag = AlgoritmoGenetico(
-        tabuleiro_inicial=TABULEIRO_INICIAL_1,
+        tabuleiro_inicial=tabuleiro_teste,
         tamanho_pop=300,          # População
         tamanho_cromossomo=31,    # Sequência
         geracoes=300,             
@@ -50,7 +60,7 @@ def main():
     print("\nMelhor sequencia encontrada:", melhor_solucao)
     
     #imprimir resultado
-    atual = TABULEIRO_INICIAL_1
+    atual = tabuleiro_teste
     print("\nExecutando Movimentos no Tabuleiro:")
     passos_uteis = 0
     for mov in melhor_solucao:
@@ -71,10 +81,10 @@ def main():
 #------------------------------------------------------------------------#  
     print("\n--- INICIANDO ALGORITMO A* PARA 8-PUZZLE ---")
     print("Tabuleiro Inicial:")
-    tabuleiro.imprimir_tabuleiro(TABULEIRO_INICIAL_1)
+    tabuleiro.imprimir_tabuleiro(tabuleiro_teste)
     
     # Executa o A*
-    buscadorAE = AEstrela(TABULEIRO_INICIAL_1)
+    buscadorAE = AEstrela(tabuleiro_teste)
     melhor_solucaoAE = buscadorAE.executar()
     
     if melhor_solucaoAE:
