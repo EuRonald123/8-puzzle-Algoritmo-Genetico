@@ -4,7 +4,7 @@ from puzzle8 import tabuleiro
 class AEstrela:
     def __init__(self, tabuleiro_inicial):
         self.inicial = tabuleiro_inicial
-        self.objetivo = tabuleiro.OBJETIVO
+        self.objetivo = tabuleiro.tabuleiros["objetivo"]
 
     def executar(self):
         contador = 0

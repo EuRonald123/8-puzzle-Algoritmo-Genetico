@@ -1,9 +1,37 @@
 import copy
 
-# Tabuleiro Objetivo
-OBJETIVO = [[1, 2, 3], 
-            [4, 5, 6], 
-            [7, 8, 0]]
+tabuleiros = {
+    
+    "objetivo": [  #tabuleiro objetivo -> apenas visual pois o manhattan calcula direto nos indices
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 0]
+    ],
+    
+    "facil" : [
+        [1, 3, 5],
+        [4, 2, 0],
+        [7, 8, 6]
+    ],
+
+    "medio" : [
+        [8, 2, 3],
+        [1, 6, 4],
+        [7, 0, 5]
+    ],
+
+    "dificil" : [
+        [8, 6, 7],
+        [2, 5, 4],
+        [3, 0, 1]
+    ],
+    
+    "impossivel": [ # sem solucao
+        [8, 3, 6],
+        [5, 4, 7],
+        [2, 0, 1]
+    ]
+}
 
 MOVIMENTOS = ['C', 'B', 'E', 'D']  # Cima, Baixo, Esquerda, Direita
 PARES_OPOSTOS = {'C': 'B', 'B': 'C', 'E': 'D', 'D': 'E'}

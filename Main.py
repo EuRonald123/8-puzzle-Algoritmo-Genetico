@@ -3,39 +3,12 @@ from algoritmos.alg_genetico import AlgoritmoGenetico
 from algoritmos.alg_AEstrela import AEstrela
 
 
-#Alguns tabuleiros para testes
-tabuleiros = {
-    #facil
-    "facil" : [
-        [1, 3, 5],
-        [4, 2, 0],
-        [7, 8, 6]
-    ],
+'''
+é possivel alterar o tabuleiro la no arquivo tabuleiro.py, estão lá.
 
-    #medio
-    "medio" : [
-        [8, 2, 3],
-        [1, 6, 4],
-        [7, 0, 5]
-    ],
-
-    #dificil
-    "dificil" : [
-        [8, 6, 7],
-        [2, 5, 4],
-        [3, 0, 1]
-    ],
-    
-    "impossivel": [ # sem solucao
-        [8, 3, 6],
-        [5, 4, 7],
-        [2, 0, 1]
-    ],
-    
-}
-
-#so alterar aqui que muda o tabuleiro usando para teste
-tabuleiro_teste = tabuleiros["dificil"]
+opcoes de tabuleiro: facil, medio, dificil, impossivel
+'''
+tabuleiro_teste = tabuleiro.tabuleiros["medio"]
 
 def main():
     print("--- INICIANDO ALGORITMO GENÉTICO PARA 8-PUZZLE ---")
@@ -43,7 +16,7 @@ def main():
     tabuleiro.imprimir_tabuleiro(tabuleiro_teste)
     
     dist_inicial = tabuleiro.calcular_manhattan(tabuleiro_teste)
-    print(f"Distancia Manhattan do inicio: {dist_inicial}\n")
+    #print(f"Distancia Manhattan do inicio: {dist_inicial}\n")
     
     # Executa o AG
     ag = AlgoritmoGenetico(
