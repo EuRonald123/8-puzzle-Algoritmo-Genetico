@@ -14,9 +14,9 @@ TABULEIRO_INICIAL_0 = [
 
 #medio
 TABULEIRO_INICIAL_1 = [
-    [8, 6, 7],
-    [2, 5, 4],
-    [3, 0, 1]
+    [8, 2, 3],
+    [1, 6, 4],
+    [7, 0, 5]
 ]
 
 #dificil
@@ -30,14 +30,14 @@ TABULEIRO_INICIAL_2 = [
 def main():
     print("--- INICIANDO ALGORITMO GENÉTICO PARA 8-PUZZLE ---")
     print("Tabuleiro Inicial:")
-    tabuleiro.imprimir_tabuleiro(TABULEIRO_INICIAL_0)
+    tabuleiro.imprimir_tabuleiro(TABULEIRO_INICIAL_1)
     
-    dist_inicial = tabuleiro.calcular_manhattan(TABULEIRO_INICIAL_0)
+    dist_inicial = tabuleiro.calcular_manhattan(TABULEIRO_INICIAL_1)
     print(f"Distancia Manhattan do inicio: {dist_inicial}\n")
     
     # Executa o AG
     ag = AlgoritmoGenetico(
-        tabuleiro_inicial=TABULEIRO_INICIAL_0,
+        tabuleiro_inicial=TABULEIRO_INICIAL_1,
         tamanho_pop=300,          # População
         tamanho_cromossomo=31,    # Sequência
         geracoes=300,             
@@ -50,7 +50,7 @@ def main():
     print("\nMelhor sequencia encontrada:", melhor_solucao)
     
     #imprimir resultado
-    atual = TABULEIRO_INICIAL_0
+    atual = TABULEIRO_INICIAL_1
     print("\nExecutando Movimentos no Tabuleiro:")
     passos_uteis = 0
     for mov in melhor_solucao:
@@ -64,17 +64,17 @@ def main():
             
         if tabuleiro.calcular_manhattan(atual) == 0:
             print(f"\nSolucao encontrada com {len(melhor_solucao)} passos!")
+            print("Melhor sequencia encontrada:", melhor_solucao)
             break
     
-    print("SOLUCAO NAO ENCONTRADA usando AG\n")
         
 #------------------------------------------------------------------------#  
     print("\n--- INICIANDO ALGORITMO A* PARA 8-PUZZLE ---")
     print("Tabuleiro Inicial:")
-    tabuleiro.imprimir_tabuleiro(TABULEIRO_INICIAL_0)
+    tabuleiro.imprimir_tabuleiro(TABULEIRO_INICIAL_1)
     
     # Executa o A*
-    buscadorAE = AEstrela(TABULEIRO_INICIAL_0)
+    buscadorAE = AEstrela(TABULEIRO_INICIAL_1)
     melhor_solucaoAE = buscadorAE.executar()
     
     if melhor_solucaoAE:
