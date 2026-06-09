@@ -8,7 +8,7 @@ from algoritmos.alg_AEstrela import AEstrela
 
 opcoes de tabuleiro: facil, medio, dificil, impossivel
 '''
-tabuleiro_teste = tabuleiro.tabuleiros["medio"]
+tabuleiro_teste = tabuleiro.tabuleiros["teste"]
 
 def main():
     print("--- INICIANDO ALGORITMO GENÉTICO PARA 8-PUZZLE ---")
@@ -21,8 +21,8 @@ def main():
     # Executa o AG
     ag = AlgoritmoGenetico(
         tabuleiro_inicial=tabuleiro_teste,
-        tamanho_pop=300,          # População
-        tamanho_cromossomo=31,    # Sequência
+        tamanho_pop=800,          # População
+        tamanho_cromossomo=90,    # Sequência
         geracoes=300,             
         tx_mutacao=0.1,
         tx_crossover=0.8
